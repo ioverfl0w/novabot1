@@ -11,7 +11,7 @@ class TestEvent:
 		print
 		
 	def strike(self):
-		return 1 if (self.start + self.delay) <= time.time() else 0
+		return (self.start + self.delay) <= time.time()
 			
 	def clear(self):
 		self.start = time.time()

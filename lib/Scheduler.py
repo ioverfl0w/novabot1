@@ -22,6 +22,6 @@ class Scheduler:
 
 	def check(self):
 		for x in self.evt:
-			if x.strike() == 1:
+			if x.strike():
 				x.perform()
 				x.clear()

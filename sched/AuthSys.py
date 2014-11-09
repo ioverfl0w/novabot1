@@ -2,11 +2,11 @@ import time
 
 class AuthSys:
 	
-	def __init__(self, engine):
+	def __init__(self, eng):
 		self.name = "authsys"
+		self.engine = eng
 		self.engine.get_access().set_authsys(self)
 		self.session = []
-		self.engine = engine
 		#delay in seconds
 		self.delay = 60*60 #1 hour timed session (time is in seconds)
 		self.start = 0
@@ -65,7 +65,7 @@ class AuthSys:
 			#self.engine.log.write("AuthSys timed for " + self.session[0][1] + "@" + self.session[0][0]);
 		
 	def strike(self):
-		return 1 if (self.start + self.delay) <= time.time() else 0
+		return (self.start + self.delay) <= time.time()
 			
 	def clear(self, locked=True):
 		if not locked:
