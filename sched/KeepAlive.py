@@ -25,5 +25,6 @@ class KeepAlive:
 		self.start = time.time()
 
 	def perform(self):
+		self.engine.check()
 		for b in self.bots:
 			b.ping()

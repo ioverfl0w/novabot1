@@ -37,6 +37,7 @@ class Engine:
 
 	def check(self):
 		if len(self.offline) > 0:
+			retainer = []
 			for i in self.offline:
 				self.log.write("Restarting bot #" + str(i))
 				try:
@@ -44,7 +45,8 @@ class Engine:
 					self.log.write("Reconnected " + self.binfo[i][1].nick + "@" + self.binfo[i][0].name + " id-" + str(i))
 				except:
 					self.log.write("Error reconnecting " + self.binfo[i][1].nick + "@" + self.binfo[i][0].name)
-			self.offline = []
+					retainer.append(i)
+			self.offline = retainer
 
 	def connect(self, index):
 		bot = IrcBot.IrcBot(self, index[0])
@@ -66,7 +68,6 @@ class Engine:
 		self.boot()
 
 		while True:
-			self.check()
 			self.sched.check()
 			for a in self.get_bots():
 				self.event.process(a, a.read())
