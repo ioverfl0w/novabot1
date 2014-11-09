@@ -25,6 +25,7 @@ class Event:
 		for y in x:
 			if not self.last == None:
 				y = self.last + y
+				self.last = None
 			
 			args = y.split(" ")
 			if len(args) == 1:
