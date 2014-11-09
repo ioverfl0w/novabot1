@@ -1,0 +1,53 @@
+NovaBotr1 by wadec
+irc.rizon.net #nova
+join if you use it, say thanks, give tips and suggestions,
+report all problems so they can be fixed
+
+---------------
+Quick starting the bot
+---------------
+
+Pretty simple IRC bot in python. You can create multiple bots that run
+on multiple servers, use multiple access lists or just one, all up to 
+you.
+
+To create a bot, create an array with two elements, Network and Identity.
+The network is used to sort out which nick belongs to which server for
+the access.
+
+For each bot array you have, you need to add it to the array being sent
+through to create the engine instance. This is important you add the bot
+if you want it to be created and properly processed.
+
+All mods (found in ./mods/) are then loaded into the Event system, and
+scheduled timers are added to the Scheduler system.
+
+---------------
+Creating a mod
+---------------
+
+To create a mod, copy from the ./mods/ModTemplate.py file. You can look
+in ./lib/IrcBot.py to get an idea of the syntax for using the bot, and
+other library files to see how the bot works overall.
+
+---------------
+Creating a scheduled instance
+---------------
+
+Like a mod, you can use the structure of the ./sched/TestEvent.py file as
+a base. Set the name, the delay (in seconds), and switch whether it controls
+a single bot or multiple bots. You can change this by removing the bot
+declaration in the constructor for your Schedule event, and declare the
+engine instance instead. Refer to how ./sched/AuthSys.py is initiated.
+
+---------------
+Identify your access
+---------------
+
+Simply type a period. '.' is the auth key to check a user's whois for
+being identified. Note the access file is loaded once on start, so any
+changes will not be loaded unless (a) an authenticated user performs
+the "!reload" command in the Basic mod, or (b) the bot is restarted.
+
+This method is used because I didn't want to check on a user's whois 
+every message, so this will work for now. Suggestions welcome.
