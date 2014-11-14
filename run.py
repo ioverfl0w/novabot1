@@ -33,6 +33,5 @@ event.add_mod(Basic.Basic(eng))
 scheduler.schedule_event(AuthSys.AuthSys(eng))
 scheduler.schedule_event(KeepAlive.KeepAlive(eng))
 
-while True:
-	eng.execute()
+eng.execute()
 
