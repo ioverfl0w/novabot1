@@ -9,7 +9,7 @@ class AlarmClock:
 		if not location.startswith("#"):
 			return
 		
-		if args[0] == "!add":
+		if args[0] == "!newalarm":
 			if len(args) > 2:
 				try:
 					time = int(args[1])
@@ -20,7 +20,7 @@ class AlarmClock:
 					return bot.notice(who[0], "You already have an alarm set.")
 				return bot.notice(who[0], "Your alarm has been set for " + args[1] + " minutes from now.")
 			else:
-				return bot.notice(who[0], "Syntax: !add [time] [message]")
+				return bot.notice(who[0], "Syntax: !newalarm [time] [message]")
 				
 		if args[0] == "!view":
 			alarm = self.alarm.read_alarm(who)

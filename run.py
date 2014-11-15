@@ -17,6 +17,7 @@ sys.path.append("./mods/")
 import Basic
 import AdvControl
 import AlarmClock
+import Stats
 
 logger = Logger.Logger()
 access = Access.Access(logger)
@@ -26,7 +27,7 @@ scheduler = Scheduler.Scheduler()
 # bot network info
 #		Title	Network			Port	NICK	USER		NICKSERV		[AJOIN]
 rizon = [Utility.Network("Rizon", "irc.rizon.net", 6697),
-		Utility.Identity("NovaBot1", "nova", "passwordhere", ["#nova"])]
+		Utility.Identity("NovaBot1", "nova", "passwordhere", ["#testing"])]
 
 #create Engine
 eng = Engine.Engine(event, [rizon], scheduler, logger) #event, bots, sched, logger
@@ -38,6 +39,7 @@ scheduler.schedule_event(Alarms.Alarms())
 event.add_mod(Basic.Basic(eng))
 event.add_mod(AdvControl.AdvControl(eng))
 event.add_mod(AlarmClock.AlarmClock(scheduler.get_event("alarms")))
+event.add_mod(Stats.Stats(eng))
 
 eng.execute()
 

@@ -71,7 +71,7 @@ class IrcBot:
 			self.engine.shutdown(self)
 
 	def ping(self):
-		self.send("PING rel4yircbot")
+		self.send("PING novabotirc")
 
 	def whois(self, target):
 		self.send("WHOIS " + target)

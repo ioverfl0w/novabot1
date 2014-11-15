@@ -2,11 +2,11 @@ import sys
 sys.path.append("./lib/")
 import Utility
 
-class ModTemplate:
+class Stats:
 	
 	def __init__(self, eng):
 		self.type = "PRIVMSG"
-		self.name = "modtemplate"
+		self.name = "stats"
 		self.engine = eng
 		self.func = Utility.Misc()
 

@@ -26,6 +26,8 @@ class Engine:
 		self.create_bots()
 		self.event.reload_mods()
 		self.sched.reload_mods()
+		self.log.write("Loaded " + str(len(self.event.mods)) + " Modules")
+		self.log.write("Loaded " + str(len(self.sched.evt)) + " Schedules")
 		self.log.write("Engine boot complete")
 
 	def create_bots(self):
