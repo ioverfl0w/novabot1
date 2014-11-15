@@ -2,6 +2,7 @@ class AlarmClock:
 	
 	def __init__(self, alarm):
 		self.type = "PRIVMSG"
+		self.name = "alarmclock"
 		self.alarm = alarm
 
 	def message(self, bot, who, location, message, args):
@@ -14,7 +15,7 @@ class AlarmClock:
 					time = int(args[1])
 				except Exception:
 					return bot.notice(who[0], "Invalid time. How many minutes from now?")
-				chk = self.alarm.add_alarm(who, time, location, message[message.index(args[2]):])
+				chk = self.alarm.add_alarm(who, time, location, message[message.index(args[2]):], bot)
 				if chk == 1:
 					return bot.notice(who[0], "You already have an alarm set.")
 				return bot.notice(who[0], "Your alarm has been set for " + args[1] + " minutes from now.")

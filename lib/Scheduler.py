@@ -9,6 +9,12 @@ class Scheduler:
 				return x
 		return None
 		
+	def get_list(self):
+		result = []
+		for e in self.evt:
+			result.append(e.name)
+		return result
+		
 	def schedule_event(self, sched):
 		self.evt.append(sched)
 		sched.clear()

@@ -18,6 +18,7 @@ class Basic:
 	
 	def __init__(self, eng):
 		self.type = "PRIVMSG"
+		self.name = "basicctrl"
 		self.engine = eng
 		self.func = Utility.Misc()
 

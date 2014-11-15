@@ -2,12 +2,11 @@ import time
 
 class Alarms:
 	
-	def __init__(self, bot):
+	def __init__(self):
 		self.name = "alarms"
 		#delay in seconds
 		self.delay = 1
 		self.start = 0
-		self.bot = bot
 		self.alarms = []
 		
 	def strike(self):
@@ -30,17 +29,17 @@ class Alarms:
 				return 1
 		return 0
 		
-	def add_alarm(self, registrar, tme, channel, message):
+	def add_alarm(self, registrar, tme, channel, message, bot):
 		for a in self.alarms:
 			if a[0] == registrar[0]:
 				return 1 #already has an alarm set
 				
-		self.alarms.append([registrar[0], (tme * 60) + time.time(), channel, message])
+		self.alarms.append([registrar[0], (tme * 60) + time.time(), channel, message, bot])
 		return 0
 	
 	def exec_alarm(self, alarm):
-		self.bot.message(alarm[2], "3Alarm 1- " + alarm[3] + " [set by " + alarm[0] + "]")
-		self.bot.notice(alarm[0], "Your alarm has gone off!")
+		alarm[4].message(alarm[2], "3Alarm 1- " + alarm[3] + " [set by " + alarm[0] + "]")
+		alarm[4].notice(alarm[0], "Your alarm has gone off!")
 		self.alarms.remove(alarm)
 	
 	def perform(self):

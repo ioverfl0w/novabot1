@@ -12,8 +12,11 @@ import Logger
 sys.path.append("./sched/")
 import AuthSys
 import KeepAlive
+import Alarms
 sys.path.append("./mods/")
 import Basic
+import AdvControl
+import AlarmClock
 
 logger = Logger.Logger()
 access = Access.Access(logger)
@@ -23,15 +26,18 @@ scheduler = Scheduler.Scheduler()
 # bot network info
 #		Title	Network			Port	NICK	USER		NICKSERV		[AJOIN]
 rizon = [Utility.Network("Rizon", "irc.rizon.net", 6697),
-		Utility.Identity("NovaBot", "nova", "passwordhere", ["#nova"])]
+		Utility.Identity("NovaBot1", "nova", "passwordhere", ["#nova"])]
 
 #create Engine
 eng = Engine.Engine(event, [rizon], scheduler, logger) #event, bots, sched, logger
 
 #modules we are loading
-event.add_mod(Basic.Basic(eng))
 scheduler.schedule_event(AuthSys.AuthSys(eng))
 scheduler.schedule_event(KeepAlive.KeepAlive(eng))
+scheduler.schedule_event(Alarms.Alarms())
+event.add_mod(Basic.Basic(eng))
+event.add_mod(AdvControl.AdvControl(eng))
+event.add_mod(AlarmClock.AlarmClock(scheduler.get_event("alarms")))
 
 eng.execute()
 

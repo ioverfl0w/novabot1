@@ -7,6 +7,12 @@ class Event:
 
 	def add_mod(self, mod):
 		self.mods.append(mod)
+		
+	def get_list(self):
+		result = []
+		for m in self.mods:
+			result.append(m.name)
+		return result
 
 	def reload_mods(self):
 		for mod in self.mods:
