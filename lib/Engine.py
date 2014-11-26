@@ -13,13 +13,15 @@ class Engine:
 		self.log = log
 		self.log.write("Engine created")
 
-	def shutdown(self, bot):
+	def shutdown(self, bot, immediate=False):
 		index = self.index(bot)
 		if index >= 0:
 			bot.close()
 			self.offline.append(index)
 			self.bots.remove(bot)
 			self.log.write("Shutdown of " + bot.network.name + " complete (id-" + str(index) + ")")
+			if immediate:
+				self.check()
 
 	def boot(self):
 		self.log.write("Starting system...")

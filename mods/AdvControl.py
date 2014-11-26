@@ -3,7 +3,7 @@ import traceback
 sys.path.append("./lib/")
 import Utility
 
-commands = ["!botstats", "!cmods", "!csched", "!umod", "!lmod"]
+commands = ["!help", "!botstats", "!cmods", "!cscheds", "!umod", "!lmod", "!reboot"]
 
 class AdvControl:
 	
@@ -19,7 +19,7 @@ class AdvControl:
 			return
 		cmd = args[0].lower()
 		
-		if cmd == "!advhelp":
+		if cmd == "!help":
 			return bot.notice(who[0], "Advanced Control help: " + ", ".join(commands))
 		
 		if cmd == "!botstats":
@@ -30,7 +30,7 @@ class AdvControl:
 		if cmd == "!cmods":
 			return bot.message(location, "LoadedMods: " + ", ".join(self.engine.event.get_list()))
 			
-		if cmd == "!csched":
+		if cmd == "!cscheds":
 			return bot.message(location, "LoadedSchedules: " + ", ".join(self.engine.sched.get_list()))
 			
 		if (rights < 1):
@@ -47,4 +47,14 @@ class AdvControl:
 				return bot.message(location, "Reloaded module " + args[1])
 			else:
 				return bot.message(location, "Unable to reload module " + args[1])
+				
+		if cmd == "!reboot":
+			if len(args) > 1 and args[1].lower() == "confirm":
+				bot.message(location, "Going down now!")
+				self.engine.log.write("Confirmed shutdown by " + who[0] + " on " + bot.network.name)
+				return self.engine.shutdown(bot, immediate=True)
+			else:
+				self.engine.log.write("Shutdown by " + who[0] + " on " + bot.network.name)
+				bot.message(location, "Good-bye!")
+				return self.engine.shutdown(bot)
 				

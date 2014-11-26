@@ -11,6 +11,12 @@ class Event:
 	def add_mod(self, mod):
 		self.mods.append(mod)
 		
+	def get_mod(self, name):
+		for mod in self.mods:
+			if mod.name == name:
+				return mod
+		return None
+		
 	def unload(self, name):
 		name = name.lower()
 		for mod in self.mods:

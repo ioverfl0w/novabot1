@@ -61,7 +61,9 @@ class Basic:
 			for ses in seslist:
 				m = int(ses[2] / 60)
 				s = int(ses[2] - (m * 60))
-				bot.notice(who[0], self.func.space(ses[0], 11) + self.func.space(ses[1], 10) + str(m) + "m" + str(s) + "s")
+				h = 0 if m < 60 else m / 60
+				m = m if h == 0 else m - (h * 60)
+				bot.notice(who[0], self.func.space(ses[0], 11) + self.func.space(ses[1], 10) + ("" if h == 0 else str(h) + "h") + str(m) + "m" + str(s) + "s")
 			return
 
 		if (self.engine.get_access().get_user_rights(who, bot) < 3): # Root commands (3+)

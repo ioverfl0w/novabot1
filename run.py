@@ -13,6 +13,7 @@ sys.path.append("./sched/")
 import AuthSys
 import KeepAlive
 import Alarms
+import StatPush
 sys.path.append("./mods/")
 import Basic
 import AdvControl
@@ -33,13 +34,14 @@ rizon = [Utility.Network("Rizon", "irc.rizon.net", 6697),
 eng = Engine.Engine(event, [rizon], scheduler, logger) #event, bots, sched, logger
 
 #modules we are loading
-scheduler.schedule_event(AuthSys.AuthSys(eng))
-scheduler.schedule_event(KeepAlive.KeepAlive(eng))
-scheduler.schedule_event(Alarms.Alarms())
 event.add_mod(Basic.Basic(eng))
 event.add_mod(AdvControl.AdvControl(eng))
 event.add_mod(AlarmClock.AlarmClock(scheduler.get_event("alarms")))
 event.add_mod(Stats.Stats(eng))
+scheduler.schedule_event(AuthSys.AuthSys(eng))
+scheduler.schedule_event(KeepAlive.KeepAlive(eng))
+scheduler.schedule_event(Alarms.Alarms())
+scheduler.schedule_event(StatPush.StatPush(event.get_mod("stats")))
 
 eng.execute()
 

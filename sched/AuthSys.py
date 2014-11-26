@@ -8,7 +8,7 @@ class AuthSys:
 		self.engine.get_access().set_authsys(self)
 		self.session = []
 		#delay in seconds
-		self.delay = 60*60 #1 hour timed session (time is in seconds)
+		self.delay = 24*60*60 #24 hour timed session (time is in seconds)
 		self.start = 0
 
 	def clear_sessions(self):
