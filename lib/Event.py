@@ -78,7 +78,7 @@ class Event:
 					return
 
 				if args[1] == "PRIVMSG":
-					self.msg(bot, args[0][1:], args[2], line[line[1:].index(':') + 2:])
+					self.msg(bot, args[0][1:], args[2], line[line[1:].index(' :') + 3:])
 				
 				if args[1] == "JOIN":
 					self.join(bot, args[0][1:], args[2])
